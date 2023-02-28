@@ -85,6 +85,14 @@ html {
     position: relative;
 }
 
+@media screen and (max-device-width: 480px) {
+    .container {
+        margin: auto;
+        padding: 0;
+    }
+    
+}
+
 .overlay {
     position: absolute;
     top: 50%;
@@ -98,6 +106,13 @@ html {
     flex-flow: column;
     justify-content: center;
     align-items: center;
+}
+
+@media screen and (max-device-width: 480px) {
+    .overlay {
+        width: 50%;
+        left: 55%;
+    }
 }
 
 .title {
@@ -118,6 +133,13 @@ html {
     background: #a8c899;
 }
 
+@media screen and (max-device-width: 480px) {
+    #gameBoard {
+        width: 440px;
+        height: 440px;
+    }
+}
+
 .gameOverGrid {
     margin: auto;
 } 
@@ -127,6 +149,13 @@ html {
     width: 15px;
     height: 15px;
     box-sizing: border-box;
+}
+
+@media screen and (max-device-width: 480px) {
+    .pixel {
+        width: 11px;
+        height: 11px;
+    }
 }
 
 .snakePixel {
@@ -178,6 +207,18 @@ html {
     background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
     text-decoration: none;
 } 
+
+.arrow {
+    position: absolute;
+}
+
+.up {
+    left: 50%;
+}
+
+.down {
+    left: 50%;
+}
 
 /* Typog */ /*! Typebase.less v0.1.0 | MIT License */ /* Setup */
 html {
