@@ -208,10 +208,24 @@ html {
     text-decoration: none;
 } 
 
-.arrow {
-    position: absolute;
+#arrowKeys {
+    position: relative;
+    margin: auto;
+    display: none;
 }
 
+@media screen and (max-device-width: 480px) {
+    #arrowKeys {
+        display: inline;
+    }
+}
+
+.arrow {
+    margin-top: 15px;
+    font-size: 42px;
+}
+
+/*
 .up {
     left: 50%;
 }
@@ -219,6 +233,15 @@ html {
 .down {
     left: 50%;
 }
+
+.left {
+    left: 40%;
+}
+
+.right {
+    left: 60%;
+}
+*/
 
 /* Typog */ /*! Typebase.less v0.1.0 | MIT License */ /* Setup */
 html {

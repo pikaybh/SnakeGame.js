@@ -1,6 +1,7 @@
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
 
+var dirArray = ['u', 'l', 'd', 'r'];
 var gameBoardSize = 40;
 var gamePoints = 0;
 var gameSpeed = 100;
@@ -16,7 +17,7 @@ $(document).ready(function () {
 var Snake = {
     position: [[20, 20], [20, 19], [20, 18]], // snake start position
     size: 3,
-    direction: "r",
+    direction: dirArray[Math.floor(Math.random() * dirArray.length)],
     alive: true
 }
 
@@ -25,7 +26,13 @@ var Food = {
     present: false
 }
 
+function highestScore() {
+    return 1000;
+}
+
 function createBoard() {
+    // $("#h-score").html("Highest Score: " + highestScore().toString());
+
     $("#gameBoard").empty();
     var size = gameBoardSize;
 
@@ -73,7 +80,7 @@ function moveSnake() {
             Food.present = false;
             gamePoints += 5;
             $(".row:nth-child(" + Food.position[0] + ") > .pixel:nth-child(" + Food.position[1] + ")").removeClass("foodPixel");
-            $("#score").html("Score: " + gamePoints)
+            $("#score").html("Your Score: " + gamePoints)
             if (gamePoints % 16 == 0 && gameSpeed > 10) { gameSpeed -= 5; };
         } else {
             $(".row:nth-child(" + Snake.position[Snake.size - 1][0] + ") > .pixel:nth-child(" + Snake.position[Snake.size - 1][1] + ")").removeClass("snakePixel");
@@ -96,6 +103,11 @@ function generateFood() {
 }
 
 function keyPress() {
+    $("#u").click(() => {if (Snake.direction != "d") { Snake.direction = "u"; }})
+    $("#d").click(() => {if (Snake.direction != "u") { Snake.direction = "d"; }})
+    $("#l").click(() => {if (Snake.direction != "r") { Snake.direction = "l"; }})
+    $("#r").click(() => {if (Snake.direction != "l") { Snake.direction = "r"; }})
+
     $(document).one("keydown", function (key) {
         switch (key.which) {
             case 37: // left arrow
@@ -166,8 +178,21 @@ function gameOver() {
 function startGame() {
     // reset game settings
     Snake.size = 3;
-    Snake.position = [[20, 20], [20, 19], [20, 18]];
-    Snake.direction = "r";
+    switch (Snake.direction) {
+        case 'u' :
+            Snake.position = [[20, 20], [21, 20], [22, 20]];
+            break;
+        case 'd' :
+            Snake.position = [[20, 20], [19, 20], [18, 20]];
+            break;
+        case 'l' :
+            Snake.position = [[20, 20], [20, 21], [20, 22]];
+            break;
+        case 'r' :
+            Snake.position = [[20, 20], [20, 19], [20, 18]];
+            break;
+    }
+    // Snake.direction =   // "r";
     Snake.alive = true;
     gameSpeed = 100;
     gamePoints = 0;

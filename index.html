@@ -9,6 +9,7 @@
     <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
     <link rel="stylesheet" href="./reset.css">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <script defer src="./main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
         integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" 
@@ -20,7 +21,8 @@
     <div class="container">
         <header class="title">
             <h2>Snake Game</h2>
-            <h3 id="score">Score:</h3>
+            <h3 id="h-score">Highest Score:</h3>
+            <h3 id="score">Your Score:</h3>
         </header>
     </div>
     <div class="container">
@@ -32,10 +34,11 @@
         </section>
         <section id="gameBoard"></section>
         <section id="arrowKeys">
-            <button id="u" class="arrow up">u</button>
-            <button id="d" class="arrow down">d</button>
-            <button id="l" class="arrow left">l</button>
-            <button id="r" class="arrow right">r</button>
+            <button id="u" class="arrow up"><i class="fa fa-arrow-up"></i></button>
+            <br/>
+            <button id="l" class="arrow left"><i class="fa fa-arrow-left"></i></button>
+            <button id="d" class="arrow down"><i class="fa fa-arrow-down"></i></button>
+            <button id="r" class="arrow right"><i class="fa fa-arrow-right"></i></button>
         </section>
     </div>
 </body>
