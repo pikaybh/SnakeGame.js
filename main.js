@@ -4,13 +4,19 @@
 var dirArray = ['u', 'l', 'd', 'r'];
 var gameBoardSize = 40;
 var gamePoints = 0;
-var gameSpeed = 100;
+var initialGameSpeed = 100;
+var gameSpeed = initialGameSpeed;
 
 $(document).ready(function () {
     console.log("Ready Player One!");
     createBoard();
     $(".btn").click(function () {
         startGame();
+    });
+    document.addEventListener('keydown', function (e) {
+        if (e.keyCode === 13) {
+            startGame();
+        }
     });
 });
 
@@ -131,6 +137,7 @@ function gameLoop() {
         keyPress();
         generateFood();
         moveSnake();
+        if (gameSpeed >= 10) {gameSpeed = initialGameSpeed - gamePoints / 5;}
         if (Snake.alive) { gameLoop(); }
     }, gameSpeed);
 }
@@ -158,6 +165,7 @@ function alive(head) {
 function gameOver() {
     Snake.alive = false;
     console.log("Game Over!");
+    $(".btn").html("Try again")
     $(".overlay").show();
     $("#gameOver").show();
     var blink = function () {
@@ -201,5 +209,6 @@ function startGame() {
     // start game
     createBoard();
     $(".overlay").hide();
+    $("#score").html("Your Score: " + gamePoints)
     gameLoop();
 }
