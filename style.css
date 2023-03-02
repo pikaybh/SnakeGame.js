@@ -110,8 +110,10 @@ html {
 
 @media screen and (max-device-width: 480px) {
     .overlay {
+        top: 33%;
+        height: 30%;
         width: 50%;
-        left: 55%;
+        left: 50%;
     }
 }
 
@@ -135,8 +137,8 @@ html {
 
 @media screen and (max-device-width: 480px) {
     #gameBoard {
-        width: 440px;
-        height: 440px;
+        width: 90vw;
+        height: 90vw;
     }
 }
 
@@ -153,8 +155,8 @@ html {
 
 @media screen and (max-device-width: 480px) {
     .pixel {
-        width: 11px;
-        height: 11px;
+        width: 2.25vw;
+        height: 2.25vw;
     }
 }
 
@@ -221,8 +223,10 @@ html {
 }
 
 .arrow {
-    margin-top: 15px;
-    font-size: 42px;
+    width: 72px;
+    height: 72px;
+    margin-top: 30px;
+    font-size: 60px;
 }
 
 /*
