@@ -32,13 +32,20 @@ var Food = {
     present: false
 }
 
-function highestScore() {
-    return 1000;
+async function highestScore(playerScore) {
+    let _scores = [playerScore];
+
+    db.collection('score').get().then((res) => {
+        res.forEach((doc)=>{
+            _scores.push(doc.data().score);
+        })
+
+        $("#h-score").html("Highest Score: " + Math.max(..._scores));
+    })
 }
 
 function createBoard() {
-    // $("#h-score").html("Highest Score: " + highestScore().toString());
-
+    highestScore(gamePoints);
     $("#gameBoard").empty();
     var size = gameBoardSize;
 
@@ -85,9 +92,13 @@ function moveSnake() {
             Snake.size++;
             Food.present = false;
             gamePoints += 5;
+            highestScore(gamePoints);
             $(".row:nth-child(" + Food.position[0] + ") > .pixel:nth-child(" + Food.position[1] + ")").removeClass("foodPixel");
             $("#score").html("Your Score: " + gamePoints)
-            if (gamePoints % 16 == 0 && gameSpeed > 10) { gameSpeed -= 5; };
+            if (gamePoints % 16 == 0 && gameSpeed > 10) { 
+                gameSpeed -= 5; 
+                console.log("Game speed: " + 100 / gameSpeed);
+            };
         } else {
             $(".row:nth-child(" + Snake.position[Snake.size - 1][0] + ") > .pixel:nth-child(" + Snake.position[Snake.size - 1][1] + ")").removeClass("snakePixel");
             Snake.position.pop();
@@ -137,7 +148,6 @@ function gameLoop() {
         keyPress();
         generateFood();
         moveSnake();
-        if (gameSpeed >= 10) {gameSpeed = initialGameSpeed - gamePoints / 5;}
         if (Snake.alive) { gameLoop(); }
     }, gameSpeed);
 }
@@ -165,6 +175,13 @@ function alive(head) {
 function gameOver() {
     Snake.alive = false;
     console.log("Game Over!");
+    console.log("Your Final Point!: " + gamePoints);
+
+    if (gamePoints >= highestScore(gamePoints)) {
+        console.log("if???");
+        please_do_not_hack(gamePoints);
+    }
+
     $(".btn").html("Try again")
     $(".overlay").show();
     $("#gameOver").show();
