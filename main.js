@@ -3,6 +3,7 @@
 
 var dirArray = ['u', 'l', 'd', 'r'];
 var gameBoardSize = 40;
+var highestPoints = 0;
 var gamePoints = 0;
 var initialGameSpeed = 100;
 var gameSpeed = initialGameSpeed;
@@ -39,13 +40,15 @@ async function highestScore(playerScore) {
         res.forEach((doc)=>{
             _scores.push(doc.data().score);
         })
+        var result = Math.max(..._scores)
+        $("#h-score").html("Highest Score: " + result);
 
-        $("#h-score").html("Highest Score: " + Math.max(..._scores));
+        return result;
     })
 }
 
 function createBoard() {
-    highestScore(gamePoints);
+    highestPoints = highestScore(gamePoints);
     $("#gameBoard").empty();
     var size = gameBoardSize;
 
@@ -92,7 +95,7 @@ function moveSnake() {
             Snake.size++;
             Food.present = false;
             gamePoints += 5;
-            highestScore(gamePoints);
+            highestPoints = highestScore(gamePoints);
             $(".row:nth-child(" + Food.position[0] + ") > .pixel:nth-child(" + Food.position[1] + ")").removeClass("foodPixel");
             $("#score").html("Your Score: " + gamePoints)
             if (gamePoints % 16 == 0 && gameSpeed > 10) { 
@@ -174,13 +177,13 @@ function alive(head) {
 
 function gameOver() {
     Snake.alive = false;
-    console.log("Game Over!");
-    console.log("Your Final Point!: " + gamePoints);
 
-    if (gamePoints >= highestScore(gamePoints)) {
-        console.log("if???");
-        please_do_not_hack(gamePoints);
+    if (gamePoints > 0) {
+        console.log("Game Over!");
+        db.collection('score').add({ name : 'no_name', score: gamePoints });
     }
+
+    console.log("Your Final Point!: " + gamePoints);
 
     $(".btn").html("Try again")
     $(".overlay").show();
