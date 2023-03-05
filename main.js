@@ -36,7 +36,7 @@ var Food = {
 async function highestScore(playerScore) {
     let _scores = [playerScore];
 
-    db.collection('score').get().then((res) => {
+    score.get().then((res) => {
         res.forEach((doc)=>{
             _scores.push(doc.data().score);
         })

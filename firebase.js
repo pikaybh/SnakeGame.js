@@ -21,6 +21,16 @@ const app = firebase.initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
 const db = firebase.firestore();
+const score = db.collection('score');
+
+/*
+var score = db.collection('score').data('score');
+score.get().then((res) => {
+    res.forEach((doc) => {
+        console.log(doc.data());
+    })
+})
+*/
 
 // Sign-In
 $('#register').click(function () {
@@ -30,7 +40,7 @@ $('#register').click(function () {
 
     firebase.auth().createUserWithEmailAndPassword(email, pw).then((result) => {
         console.log(result.user)
-    }).catch((err) => {console.log(err.message)});
+    }).catch((err) => { console.log(err.message) });
 })
 
 // 로그인
