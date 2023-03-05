@@ -23,6 +23,28 @@ const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const score = db.collection('score');
 
+async function test() {
+    var result = 0;
+
+    score.get().then((res) => {
+        res.forEach((doc) => {
+            var v = doc.data().score;
+            if (v > result) { result = v };
+        })
+        console.log(result);
+
+        return result;
+    })
+}
+
+test().then((res) => {console.log(res)});
+
+/*
+    .doc.set(JSON.parse(JSON.stringify()));
+firestore.collection('collectionName')
+    .doc('id')
+    .set(JSON.parse(JSON.stringify(myCustomObject)));
+
 /*
 var score = db.collection('score').data('score');
 score.get().then((res) => {
